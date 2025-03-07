@@ -28,14 +28,11 @@ This code is designed to fit various exponential models to neuronal response dat
 
 ## Pipeline Overview
 
-The **main script** (`Ephys-scripts/ephys_analysis/main_time_constant_gratings`) calls functions from  
-`Ephys-scripts/ephys_analysis/functions/time_constant` and handles overall execution with the pre-processing steps outlines below.
-
 Overview of main:
-![Overview of main](images/main_flowchart.png)
+![Overview of main](main_flowchart.png)
 
 Overview of the main fitting function:
-![Overview of main fitting function](images/fit_flowchart.png)
+![Overview of main fitting function](fit_flowchart.png)
 
 
 ---
