@@ -300,26 +300,30 @@ def compute_f1_f0(neuron_id, dir_id, psth, stimulus_freq, timebins, threshold=0.
 
     # Plot only FFT results
     if plot:
-        fig, ax = plt.subplots(2, 1, figsize=(8, 8))  
-        
+        fig, ax = plt.subplots(2, 1, figsize=(8, 8))
+
         ax[0].plot(timebins, psth)
         ax[0].set_xlabel('Time (s)')
         ax[0].set_ylabel('Firing Rate (spikes/s)')
         ax[0].set_title(f'PSTH - Neuron {neuron_id} - Dir {dir_id}')
-    
+
         ax[1].plot(freqs[:n//2], power_spectrum)
         ax[1].axvline(stimulus_freq, color='red', linestyle='dashed', label=f'Stimulus Frequency ({stimulus_freq} Hz)')
         ax[1].set_xlabel('Frequency (Hz)')
         ax[1].set_ylabel('Power')
         ax[1].set_title(f'FFT Power Spectrum - Neuron {neuron_id} - F1/F0 = {f1_f0:.2f}, F0 = {f0:.2f}')
         ax[1].set_xlim(0, stimulus_freq * 2)
-    
+
         plt.tight_layout()  # Adjust layout for clarity
-        if not os.path.isdir(saveDirectory):
-            os.makedirs(saveDirectory)
-        filename = os.path.join(saveDirectory, f'{neuron_id}_{dir_id}_PSTH.png')
-        plt.savefig(filename)
-        plt.close()
+
+        if saveDirectory is not None:
+            if not os.path.isdir(saveDirectory):
+                os.makedirs(saveDirectory)
+            filename = os.path.join(saveDirectory, f'{neuron_id}_{dir_id}_PSTH.png')
+            plt.savefig(filename)
+            plt.close()
+        else:
+            plt.show()
 
     return is_oscillating, f1_f0
 
